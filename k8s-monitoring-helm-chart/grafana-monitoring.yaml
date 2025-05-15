@@ -1,0 +1,189 @@
+# cluster:
+#   name: kind
+# destinations:
+#   - name: grafana-cloud-metrics
+#     type: prometheus
+#     url: https://prometheus-prod-56-prod-us-east-2.grafana.net/api/prom/push
+#     auth:
+#       type: basic
+#       username: "2257945"
+#       password: glc_eyJvIjoiMTMzOTczMCIsIm4iOiJzdGFjay0xMTY2ODUxLWludGVncmF0aW9uLWRlZmF1bHQtZGVmYXVsdCIsImsiOiI3aHljNjFLMmx4eDE3NkttNnQ1cGJLZDQiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
+#   - name: grafana-cloud-logs
+#     type: loki
+#     url: https://logs-prod-036.grafana.net/loki/api/v1/push
+#     auth:
+#       type: basic
+#       username: "1124650"
+#       password: glc_eyJvIjoiMTMzOTczMCIsIm4iOiJzdGFjay0xMTY2ODUxLWludGVncmF0aW9uLWRlZmF1bHQtZGVmYXVsdCIsImsiOiI3aHljNjFLMmx4eDE3NkttNnQ1cGJLZDQiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
+# clusterMetrics:
+#   enabled: true
+# podLogs:
+#   enabled: true
+# alloy-logs:
+#   enabled: true
+# prometheusOperatorObjects:
+#   crds:
+#     deploy: true
+#   enabled: true
+#   serviceMonitors:
+#     enabled: true
+#     extraDiscoveryRules: |2-
+
+#             rule {
+#              source_labels = ["__meta_kubernetes_pod_label_tenant"]
+#              target_label = "tenant"
+#             }
+#             rule {
+#              source_labels = ["__meta_kubernetes_pod_label_customer"]
+#              target_label = "customer"
+#             }
+# integrations:
+#   alloy:
+#     instances:
+#       - name: alloy
+#         labelSelectors:
+#           app.kubernetes.io/name:
+#             - alloy-metrics
+# alloy-metrics:
+#   enabled: true
+
+alloy-logs:
+  enabled: true
+alloy-metrics:
+  alloy:
+    extraEnv:
+    - name: CLUSTER
+      value: cequence-internal-dev
+  cost:
+    enabled: true
+  enabled: true
+  kepler:
+    enabled: false
+  logging:
+    level: error
+  node-exporter:
+    enabled: true
+alloy-receiver:
+  alloy:
+    extraEnv:
+    - name: CLUSTER
+      value: cequence-internal-dev
+  cost:
+    enabled: true
+  enabled: false
+  kepler:
+    enabled: false
+  logging:
+    level: error
+  node-exporter:
+    enabled: true
+alloy-singleton:
+  enabled: true
+annotationAutodiscovery:
+  enabled: false
+applicationObservability:
+  enabled: false
+  receivers:
+    otlp:
+      grpc:
+        enabled: false
+      http:
+        enabled: true
+      includeDebugMetrics: true
+    zipkin:
+      enabled: true
+      includeDebugMetrics: true
+cluster:
+  name: cequence-internal-dev
+clusterEvents:
+  enabled: true
+
+clusterMetrics:
+  cadvisor:
+    metricsTuning:
+      includeMetrics:
+      - container_oom_events_total
+  enabled: true
+  kepler:
+    enabled: true
+  kube-state-metrics:
+    deploy: true
+    extraMetricProcessingRules:
+       |2-
+
+            rule {
+             source_labels = ["__meta_kubernetes_pod_label_tenant"]
+             target_label = "tenant"
+            }
+            rule {
+             source_labels = ["__meta_kubernetes_pod_label_customer"]
+             target_label = "customer"
+            }
+    metricLabelsAllowlist:
+    - pods=[app.kubernetes.io/version,app.kubernetes.io/component,customer,tenant]
+    - namespaces=[kubernetes.io/metadata.name,customer,tenant,app.kubernetes.io/managed-by]
+    - nodes=[agentpool,alpha.eksctl.io/cluster-name,alpha.eksctl.io/nodegroup-name,beta.kubernetes.io/instance-type,cloud.google.com/gke-nodepool,cluster_name,ec2_amazonaws_com_Name,ec2_amazonaws_com_aws_autoscaling_groupName,ec2_amazonaws_com_aws_autoscaling_group_name,ec2_amazonaws_com_name,eks_amazonaws_com_nodegroup,k8s_io_cloud_provider_aws,karpenter.sh/nodepool,kubernetes.azure.com/cluster,kubernetes.io/arch,kubernetes.io/hostname,kubernetes.io/os,node.kubernetes.io/instance-type,topology.kubernetes.io/region,topology.kubernetes.io/zone]
+    metricsTuning:
+      includeMetrics:
+      - kube_namespace_labels
+      - kube_pod_labels
+  node-exporter:
+    deploy: true
+    enabled: true
+  opencost:
+    enabled: false
+    metricsSource: metricsService
+    opencost:
+      exporter:
+        defaultClusterId: cequence-internal-dev
+      prometheus:
+        external:
+          url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom
+        password: xx
+        username: "xx"
+destinations:
+  - name: grafana-cloud-metrics
+    type: prometheus
+    url: https://prometheus-prod-56-prod-us-east-2.grafana.net/api/prom/push
+    auth:
+      type: basic
+      username: "2257945"
+      password: glc_eyJvIjoiMTMzOTczMCIsIm4iOiJzdGFjay0xMTY2ODUxLWludGVncmF0aW9uLWRlZmF1bHQtZGVmYXVsdCIsImsiOiI3aHljNjFLMmx4eDE3NkttNnQ1cGJLZDQiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
+  - name: grafana-cloud-logs
+    type: loki
+    url: https://logs-prod-036.grafana.net/loki/api/v1/push
+    auth:
+      type: basic
+      username: "1124650"
+      password: glc_eyJvIjoiMTMzOTczMCIsIm4iOiJzdGFjay0xMTY2ODUxLWludGVncmF0aW9uLWRlZmF1bHQtZGVmYXVsdCIsImsiOiI3aHljNjFLMmx4eDE3NkttNnQ1cGJLZDQiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
+integrations:
+  alloy:
+    instances:
+    - labelSelectors:
+        app.kubernetes.io/name:
+        - alloy-metrics
+        - alloy-singleton
+        - alloy-logs
+        - alloy-receiver
+      metrics:
+        tuning:
+          includeMetrics:
+          - alloy_build_info
+          useDefaultAllowList: true
+      name: alloy
+prometheusOperatorObjects:
+  crds:
+    deploy: true
+  enabled: true
+  serviceMonitors:
+    enabled: true
+    extraDiscoveryRules: |2-
+
+            rule {
+             source_labels = ["__meta_kubernetes_pod_label_tenant"]
+             target_label = "tenant"
+            }
+            rule {
+             source_labels = ["__meta_kubernetes_pod_label_customer"]
+             target_label = "customer"
+            }
