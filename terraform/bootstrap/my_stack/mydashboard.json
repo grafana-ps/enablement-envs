@@ -1,0 +1,1096 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 19,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 19,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"padding: 3px;\">\n  <div style=\"margin-bottom: 3px;display: flex; flex-direction: row; align-items: center; margin-top: 3px;\">\n    <img style=\"height: 40px; width: 40px; margin-right: 10px;\" src=\"https://files.readme.io/e5e1b43-grafana-loki.png\" />\n    <h1 style=\"margin-top: 5px;\">Logs Demo Dashboard</h1>\n  </div>",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "code": {
+          "language": "${var.language}",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div>\n  <a href=\"/a/cloud-home-app/onboarding-flow/logs-onboarding\" target=\"_blank\"/>\n    <h1 style=\"\n        background: linear-gradient(120deg, rgb(30,144,255), rgb(30,144,255));\n        text-align: center;\n        font-size: 1.5em;\n        padding: 0.3em;\n        color: black;\n    \">\n      + Connect my logs\n    </h1>\n  </a>\n</div>\n\n<center>",
+        "mode": "html"
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 8,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "---\n<div style=\"padding: 10px;\">\n\n### **Pre-configured Log Panels**\nThe panels below offer an introductory setup so you start observing Demo Logs. All of these panels are dynamic so you can view, share, share and inspect the data in each panel.\n\n---\n##### 💡 Tips\n- Hover over the ℹ️ icon to read a full description of what's included on each panel\n- Adjust the timepicker to select relative time range options and set custom absolute time ranges\n- Useful keyboard shortcuts for dashboards: \n   - `Ctrl+S` : Saves the current dashboard\n   - `f`: Opens the dashboard finder / search\n   - `d+s`: Dashboard settings",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum by(level)(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"info|INFO\" [$__interval]))",
+          "legendFormat": "{{service_name}}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Info Logs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum by(level)(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"warn|WARN\" [$__interval]))",
+          "legendFormat": "{{service_name}}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Warn Logs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 7
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "sum by(level)(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"err|panic|ERR\" [$__interval]))",
+          "legendFormat": "{{service_name}}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Error Logs",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "hidden",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "Errors"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "Info"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "Warning"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 1,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"err|panic|ERR\" [$__auto]))",
+          "legendFormat": "ERROR",
+          "queryType": "range",
+          "refId": "Errors"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"warn|WARN\" [$__auto]))",
+          "legendFormat": "WARN",
+          "queryType": "range",
+          "refId": "Warning"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"info|INFO\" [$__auto]))",
+          "legendFormat": "INFO",
+          "queryType": "range",
+          "refId": "Info"
+        }
+      ],
+      "title": "Logs",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 14
+      },
+      "id": 13,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"err|panic|ERR\" [$__auto]))",
+          "legendFormat": "ERROR",
+          "queryType": "range",
+          "refId": "Errors"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"warn|WARN\" [$__auto]))",
+          "legendFormat": "WARN",
+          "queryType": "range",
+          "refId": "Warning"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"info|INFO\" [$__auto]))",
+          "legendFormat": "INFO",
+          "queryType": "range",
+          "refId": "Info"
+        }
+      ],
+      "title": "Distribution by Log Level",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 14
+      },
+      "id": 14,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum by(level)(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"/api/pizza\" [$__interval]))",
+          "legendFormat": "/api/pizza",
+          "queryType": "range",
+          "refId": "Errors"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"/api/quotes\" [$__auto]))",
+          "legendFormat": "/api/quotes",
+          "queryType": "range",
+          "refId": "Warning"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"/api/tools\" [$__auto]))",
+          "legendFormat": "/api/tools",
+          "queryType": "range",
+          "refId": "Info"
+        }
+      ],
+      "title": "Distribution by Path",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 14
+      },
+      "id": 15,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum by(level)(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"POST\" [$__interval]))",
+          "legendFormat": "POST",
+          "queryType": "range",
+          "refId": "Errors"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"GET\" [$__auto]))",
+          "legendFormat": "GET",
+          "queryType": "range",
+          "refId": "Warning"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"UPDATE\" [$__auto]))",
+          "legendFormat": "UPDATE",
+          "queryType": "range",
+          "refId": "Info"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"DELETE\" [$__auto]))",
+          "hide": false,
+          "legendFormat": "DELETE",
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"PUT\" [$__auto]))",
+          "hide": false,
+          "legendFormat": "PUT",
+          "queryType": "range",
+          "refId": "B"
+        }
+      ],
+      "title": "Distribution by Method",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 14
+      },
+      "id": 16,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum by(level)(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"200\" [$__interval]))",
+          "legendFormat": "200",
+          "queryType": "range",
+          "refId": "Errors"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"404\" [$__auto]))",
+          "legendFormat": "404",
+          "queryType": "range",
+          "refId": "Warning"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"204\" [$__auto]))",
+          "legendFormat": "204",
+          "queryType": "range",
+          "refId": "Info"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"405\" [$__auto]))",
+          "hide": false,
+          "legendFormat": "405",
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({cluster=\"do-nyc1-demo-infra\"} |~ \"304\" [$__auto]))",
+          "hide": false,
+          "legendFormat": "304",
+          "queryType": "range",
+          "refId": "B"
+        }
+      ],
+      "title": "Distribution by Status Code",
+      "type": "piechart"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 18,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "---\n### **Connect your Logs**\n\nWith Grafana Cloud, you have two great options: you can send, store, and visualize your logs directly, or you can add and visualize logs from an existing logs data source. Get started now to see start analyzing your Logs.\n\nClick the **Connect my Logs** button below to begin!\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 16,
+        "x": 8,
+        "y": 21
+      },
+      "id": 9,
+      "options": {
+        "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showControls": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "12.2.0-16890666601",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "grafanacloud-demoinfra-logs"
+          },
+          "editorMode": "builder",
+          "expr": "{cluster=\"do-nyc1-demo-infra\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "type": "logs"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 0,
+        "y": 28
+      },
+      "id": 17,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div>\n  <a href=\"/a/cloud-home-app/onboarding-flow/logs-onboarding\" target=\"_blank\"/>\n    <h1 style=\"\n        background: linear-gradient(120deg, rgb(30,144,255), rgb(30,144,255));\n        text-align: center;\n        font-size: 1.5em;\n        padding: 0.3em;\n        color: black;\n    \">\n      + Connect my logs\n    </h1>\n  </a>\n</div>\n\n<center>",
+        "mode": "html"
+      },
+      "pluginVersion": "11.2.0-72125",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 0,
+        "y": 30
+      },
+      "id": 19,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "---",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.2.0-72125",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 11,
+      "options": {
+        "seriesCountSize": "sm",
+        "showSeriesCount": false,
+        "text": "Default value of text input option"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "cloud-home-links"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "grafanacloud-demoinfra-logs"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "id": 10,
+      "options": {
+        "seriesCountSize": "sm",
+        "showSeriesCount": false,
+        "text": "Default value of text input option"
+      },
+      "targets": [
+        {
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "cloud-home-integrations"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 34
+      },
+      "id": 12,
+      "options": {
+        "showImage": true
+      },
+      "title": "",
+      "transparent": true,
+      "type": "news"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 41,
+  "tags": [
+    "Logs"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Logs Demo Dashboard",
+  "uid": "fdkz6t5tcm7lse",
+  "version": 1
+}
