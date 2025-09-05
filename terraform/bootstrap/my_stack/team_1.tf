@@ -126,8 +126,31 @@ resource "grafana_service_account_token" "editor_sa_token" {
   service_account_id = grafana_service_account.editor_sa.id
 }
 
-// return the token as output so it can be shared with other teams
-output "team_1_token" {
+// create a cloud access policy for the stack
+resource "grafana_cloud_access_policy" "team_1_policy" {
+  name   = "team-1-policy"
+  region = var.region
+  scopes = ["stacks:read"]
+  realm {
+    type = "stack"
+    identifier = var.stack.id
+  }
+}
+
+// create a token for the cloud access policy
+resource "grafana_cloud_access_policy_token" "team_1_policy_token" {
+  name               = "team-1-policy-token"
+  region             = var.region
+  access_policy_id   = grafana_cloud_access_policy.team_1_policy.policy_id
+}
+
+// return the SA token as output so it can be shared with other teams
+output "team_1_sa_token" {
     value = grafana_service_account_token.editor_sa_token.key
+    sensitive = true
+}
+
+output "team_1_cas_token" {
+    value = grafana_cloud_access_policy_token.team_1_policy_token.token
     sensitive = true
 }

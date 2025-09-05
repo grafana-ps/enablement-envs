@@ -1,0 +1,25 @@
+{
+    "dashboard": {
+        "id": null,
+        "uid": null,
+        "title": "My Dashboard",
+        "tags": [],
+        "timezone": "browser",
+        "schemaVersion": 36,
+        "version": 0,
+        "panels": [],
+        "time": {
+            "from": "now-6h",
+            "to": "now"
+        },
+        "timepicker": {},
+        "templating": {
+            "list": []
+        },
+        "annotations": {
+            "list": []
+        },
+        "refresh": "5s"
+    },
+    "overwrite": false
+}

@@ -1,0 +1,108 @@
+{
+    "type": "grafana-polystat-panel",
+    "title": "CPU and Memory Metrics",
+    "datasource": "TestData CSV",
+    "targets": [
+        {
+            "refId": "A",
+            "scenarioId": "csvContent",
+            "csvContent": "server,metric,value\nserver1,cpu,75\nserver1,memory,60\nserver2,cpu,80\nserver2,memory,70"
+        }
+    ],
+    "options": {
+        "polystat": {
+            "columns": 2,
+            "rows": 1,
+            "globalThresholds": [
+                {
+                    "value": 90,
+                    "color": "red"
+                },
+                {
+                    "value": 70,
+                    "color": "orange"
+                },
+                {
+                    "value": 50,
+                    "color": "green"
+                }
+            ],
+            "compositeConfig": {
+                "composites": [
+                    {
+                        "name": "Server1 Composite",
+                        "label": "Server1",
+                        "showName": true,
+                        "showValue": true,
+                        "showMembers": false,
+                        "showComposite": true,
+                        "enabled": true,
+                        "metrics": [
+                            {
+                                "seriesMatch": "server1.cpu",
+                                "ID": "server1-cpu",
+                                "order": 0
+                            },
+                            {
+                                "seriesMatch": "server1.memory",
+                                "ID": "server1-memory",
+                                "order": 1
+                            }
+                        ],
+                        "displayMode": "all",
+                        "order": 0
+                    },
+                    {
+                        "name": "Server2 Composite",
+                        "label": "Server2",
+                        "showName": true,
+                        "showValue": true,
+                        "showMembers": false,
+                        "showComposite": true,
+                        "enabled": true,
+                        "metrics": [
+                            {
+                                "seriesMatch": "server2.cpu",
+                                "ID": "server2-cpu",
+                                "order": 0
+                            },
+                            {
+                                "seriesMatch": "server2.memory",
+                                "ID": "server2-memory",
+                                "order": 1
+                            }
+                        ],
+                        "displayMode": "all",
+                        "order": 1
+                    }
+                ],
+                "enabled": true,
+                "animationSpeed": "1500"
+            }
+        }
+    },
+    "fieldConfig": {
+        "defaults": {
+            "color": {
+                "mode": "thresholds"
+            },
+            "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                        "color": "green",
+                        "value": null
+                    },
+                    {
+                        "color": "orange",
+                        "value": 70
+                    },
+                    {
+                        "color": "red",
+                        "value": 90
+                    }
+                ]
+            }
+        }
+    }
+}

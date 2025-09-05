@@ -1,0 +1,43 @@
+{
+  "type": "stat",
+  "title": "Tickets Created (Last 7 Days)",
+  "datasource": "TestData CSV",
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "fixed",
+        "fixedColor": "green"
+      },
+      "custom": {
+        "calc": "sum",
+        "thresholdsStyle": {
+          "mode": "line"
+        }
+      }
+    },
+    "overrides": []
+  },
+  "targets": [
+    {
+      "refId": "B",
+      "scenarioId": "csv_metric_values",
+      "stringInput": "5,10,15,20,25,30,35"
+    }
+  ],
+  "options": {
+    "reduceOptions": {
+      "values": false,
+      "calcs": ["sum"],
+      "fields": ""
+    },
+    "orientation": "auto",
+    "textMode": "value_and_name",
+    "colorMode": "background"
+  },
+  "gridPos": {
+    "h": 6,
+    "w": 6,
+    "x": 12,
+    "y": 0
+  }
+}

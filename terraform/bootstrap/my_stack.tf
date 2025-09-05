@@ -25,7 +25,9 @@ module "stack_1" {
 provider "grafana" {
 
   alias = "my_stack_provider"
-  
+
+  cloud_access_policy_token = module.stack_1.cas_token
+
   // for stack resources
   url  = module.stack_1.this.url
   auth = module.stack_1.sa_token
@@ -60,7 +62,12 @@ output "stack_1" {
   sensitive = true
 }
 
-output "team_1_token" {
-  value = module.my_stack.team_1_token
+output "team_1_sa_token" {
+  value = module.my_stack.team_1_sa_token
+  sensitive = true
+}
+
+output "team_1_cas_token" {
+  value = module.my_stack.team_1_cas_token
   sensitive = true
 }

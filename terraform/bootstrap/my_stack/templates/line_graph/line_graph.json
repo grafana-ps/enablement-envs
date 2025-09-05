@@ -1,0 +1,41 @@
+{
+  "type": "timeseries",
+  "title": "${title}",
+  "datasource": "${datasource}",
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "fixed",
+        "fixedColor": "${line_color}"
+      },
+      "thresholds": {
+        "mode": "absolute",
+        "steps": ${jsonencode(thresholds)}
+      },
+      "custom": {
+        "lineInterpolation": "smooth",
+        "fillOpacity": 0.2,
+        "thresholdsStyle": {
+          "mode": "area"
+        }
+      }
+    },
+    "overrides": []
+  },
+  "targets": [],
+  "options": {
+    "legend": {
+      "displayMode": "list",
+      "placement": "bottom"
+    },
+    "tooltip": {
+      "mode": "single"
+    }
+  },
+  "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  }
+}

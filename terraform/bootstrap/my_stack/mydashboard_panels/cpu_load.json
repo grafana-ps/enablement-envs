@@ -1,0 +1,55 @@
+{
+  "type": "timeseries",
+  "title": "CPU Load",
+  "datasource": "TestData CSV",
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "fixed",
+        "fixedColor": "blue"
+      },
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "transparent",
+            "value": null
+          },
+          {
+            "color": "red",
+            "value": 60
+          }
+        ]
+      },
+      "custom": {
+        "fillOpacity": 0.2,
+        "thresholdsStyle": {
+          "mode": "line+area"
+        }
+      }
+    },
+    "overrides": []
+  },
+  "targets": [
+    {
+      "refId": "A",
+      "scenarioId": "csv_metric_values",
+      "stringInput": "50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,90,90,90,90,90,50,50,50,50,50,50,50,50,50,50,50"
+    }
+  ],
+  "options": {
+    "legend": {
+      "displayMode": "list",
+      "placement": "bottom"
+    },
+    "tooltip": {
+      "mode": "single"
+    }
+  },
+  "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  }
+}

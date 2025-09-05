@@ -1,3 +1,13 @@
+locals {
+  scopes = flatten([
+      ["accesspolicies:read", "accesspolicies:write", "stacks:read"],
+      ["stack-plugins:read", "stack-plugins:write"],
+      var.fleet_management ? ["fleet-management:read", "fleet-management:write"] : [],
+      var.connections || var.cloud_provider ? ["integration-management:read", "integration-management:write"] : [],
+      var.frontend_o11y ? ["frontend-observability:read", "frontend-observability:write", "frontend-observability:delete"] : []
+    ])
+}
+
 resource "grafana_cloud_stack" "this" {
   name        = var.name
   slug        = var.slug
@@ -21,16 +31,12 @@ resource "grafana_cloud_stack_service_account_token" "cloud_sa" {
 }
 
 resource "grafana_cloud_access_policy" "policy" {
-  
+
   # prefix with stack name for uniqueness across stacks
   name   = "${grafana_cloud_stack.this.slug}-shared-policy"
   region = grafana_cloud_stack.this.region_slug
 
-  scopes = flatten([
-      var.fleet_management ? ["fleet-management:read", "fleet-management:write"] : [],
-      var.connections || var.cloud_provider ? ["integration-management:read", "integration-management:write", "stacks:read"] : [],
-      var.frontend_o11y ? ["frontend-observability:read", "frontend-observability:write", "frontend-observability:delete"] : []
-    ])
+  scopes = local.scopes
 
   realm {
     type       = "stack"

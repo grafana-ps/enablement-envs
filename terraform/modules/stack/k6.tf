@@ -10,6 +10,6 @@ resource "grafana_k6_installation" "k6_installation" {
 
 output "k6_installation" {
 
-    value = grafana_k6_installation.k6_installation[0]
+    value = var.k6 ? grafana_k6_installation.k6_installation[0] : null
     sensitive = true
 }

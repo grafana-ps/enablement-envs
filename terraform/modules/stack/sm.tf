@@ -30,6 +30,6 @@ resource "grafana_synthetic_monitoring_installation" "sm_stack" {
 
 output "sm_installation" {
 
-    value = grafana_synthetic_monitoring_installation.sm_stack[0]
+    value = var.synthetics ? grafana_synthetic_monitoring_installation.sm_stack[0] : null
     sensitive = true
 }
