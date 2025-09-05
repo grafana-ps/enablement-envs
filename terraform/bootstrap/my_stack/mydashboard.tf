@@ -1,3 +1,4 @@
+// this creates a dashboard using the shared dashboard module
 module "my_dashboard" {
   source = "../../modules/dashboard"
 
@@ -20,6 +21,7 @@ module "my_dashboard" {
   ]
 }
 
+// this creates a panel using the project-specific line graph template
 module "cpu_load_panel_2" {
   source      = "./templates/line_graph"
   title       = "CPU Load 2"
@@ -45,6 +47,7 @@ module "cpu_load_panel_2" {
   }
 }
 
+// this creates another panel using the project-specific line graph template
 module "memory_usage_panel" {
   source      = "./templates/line_graph"
   title       = "Memory Usage"
