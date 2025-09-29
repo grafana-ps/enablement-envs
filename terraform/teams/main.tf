@@ -1,21 +1,9 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
-data "aws_secretsmanager_secret_version" "grafana_team_1" {
-  secret_id = "grafana-team-1"
-}
-
-locals {
-  grafana_team_1_secret = jsondecode(data.aws_secretsmanager_secret_version.grafana_team_1.secret_string)
-}
-
 // Create the cloud provider to load the stack
 provider "grafana" {
 
   alias = "cloud"
 
-  cloud_access_policy_token = local.grafana_team_1_secret.team_1_cas_token
+  cloud_access_policy_token = var.cas_token
 }
 
 data "grafana_cloud_stack" "stack" {
@@ -30,7 +18,7 @@ provider "grafana" {
 
   // for stack resources
   url  = data.grafana_cloud_stack.stack.url
-  auth = local.grafana_team_1_secret.team_1_sa_token
+  auth = var.team_sa_token
 }
 
 module stack {
